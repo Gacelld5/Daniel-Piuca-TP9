@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tabla de productos (simple)</title>
+ 
+</head>
+<body>
+  <h1>Productos</h1>
+
+  <div class="row">
+    <input id="name" type="text" placeholder="Nombre del producto" />
+    <button id="add">Agregar</button>
+  </div>
+
+  <table>
+    <thead>
+      <tr><th>Producto</th><th>Acción</th></tr>
+    </thead>
+    <tbody id="tbody"></tbody>
+  </table>
+
+  <script>
+    const name = document.getElementById('name');
+    const tbody = document.getElementById('tbody');
+
+    function agregar() {
+      const texto = name.value.trim();
+      if (!texto) return;
+      const tr = document.createElement('tr');
+      const tdNombre = document.createElement('td');
+      tdNombre.textContent = texto;
+      const tdAccion = document.createElement('td');
+      const btn = document.createElement('button');
+      btn.textContent = 'Quitar';
+      btn.onclick = () => tr.remove();
+      tdAccion.appendChild(btn);
+      tr.appendChild(tdNombre);
+      tr.appendChild(tdAccion);
+      tbody.appendChild(tr);
+      name.value = '';
+      name.focus();
+    }
+
+    document.getElementById('add').onclick = agregar;
+    name.addEventListener('keydown', e => { if (e.key === 'Enter') agregar(); });
+  </script>
+</body>
+</html>
+
+
